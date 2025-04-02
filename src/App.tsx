@@ -86,15 +86,37 @@ const AddForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={title}
-        onChange={handleTextChange}
-        ref={inputRef}
-      />
-      <button>Add</button>
-    </form>
+    //フォームが送信された時の処理を指定している
+    //<form>: フォーム（入力フォーム全体）を作るHTMLタグ
+    //onSubmit: フォームが送信された時に実行されるイベント
+    //handleSubmit: フォーム送信時に実行する関数
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          //テキスト入力欄を作るためのHTML属性
+          //type: 入力要素の種類を指定
+          //"text": テキスト入力型を指定
+          type="text"
+          //テキスト入力欄に表示する内容を設定する
+          //value: テキスト入力欄の内容を指定する属性
+          //{title}: 表示する文字列（この場合は title という変数の値）
+          value={title}
+          //テキスト入力欄の内容が変更された時の処理を指定している
+          //「テキスト入力欄の内容が変更されたら、その内容を保存してください」という指示
+          //onChange: テキスト入力欄の内容が変わった時に実行されるイベント
+          //handleTextChange: テキストが変更された時に実行する関数
+          onChange={handleTextChange}
+          //テキスト入力欄を直接参照するためのコード
+          //ref: 要素への参照を作成する属性
+          //inputRef: テキスト入力欄への参照を保持する変数
+          ref={inputRef}
+        />
+        {/* //追加ボタンを作るコード */}
+        {/* //<button>: クリックできるボタンを作るHTMLタグ */}
+        {/* //Add: ボタンに表示するテキスト */}
+        <button>Add</button>
+      </form>
+    </div>
   );
 };
 
