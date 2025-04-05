@@ -148,11 +148,19 @@ const AddForm = (props) => {
     </form>
   );
 };
-
+// Reactアプリケーションの主要なコンポーネントを定義するためのもの
 function App() {
+  // useStateは、Reactのフックの一つで、関数コンポーネント内で状態を管理するために使用される
+  // todosは、現在の状態を保持する変数で、この場合、todosはTodoアイテムのリストを表している。初期値として空の配列[]が設定されているため、最初はTodoアイテムが存在しない状態
+  // setTodosは、todosの状態を更新するための関数。この関数を呼び出すことで、todosの値を変更し、コンポーネントを再レンダリングさせることができる
   const [todos, setTodos] = useState([]);
-
+  // Todoリストの新しい状態を受け取り、その状態をsetTodosを使って更新するための関数を定義している
+  // updateTodosは、引数newTodosを受け取るアロー関数。この関数は、Todoリストの新しい状態を受け取り、それを適切に処理している
+  // newTodosは、更新後のTodoアイテムのリストを表す配列。この配列は、Todoアイテムの追加、削除、または変更を行った結果として生成される
   const updateTodos = (newTodos) => {
+    // ReactのuseStateフックを使用して定義された状態更新関数setTodosを呼び出すコードで、todosという状態変数の値をnewTodosに更新する役割
+    // setTodosは、useStateフックによって提供される関数で、todosの状態を更新するために使用される。この関数を呼び出すことで、Reactはコンポーネントを再レンダリングし、新しい状態を反映させる。
+    // newTodosは、更新後のTodoアイテムのリストを表す配列。この配列は、Todoアイテムの追加、削除、または変更を行った結果として生成される。
     setTodos(newTodos);
     localStorage.setItem("todos", JSON.stringify(newTodos));
   };
@@ -211,12 +219,25 @@ function App() {
 
   return (
     <>
+      {/* HTMLの<div>要素で、className属性を使用してCSSクラスを指定している */}
       <div className="container">
+        {/* ページやセクションの主要な見出しを示す要素 */}
         <h1>
+          {/* アプリケーションの主要なタイトル */}
           Todos
+          {/* Reactコンポーネント内で使用されるボタン要素で、ユーザーがクリックすることで特定のアクションを実行するためのもの */}
+          {/* <button>は、ユーザーがクリックできるボタンを作成するためのHTML要素 */}
+          {/* onClickは、ボタンがクリックされたときに実行されるイベントハンドラを指定するための属性 */}
+          {/* handlePurgeClickは、ボタンがクリックされたときに実行される関数で、通常はTodoリストから完了したアイテムを削除するなどの処理を行う */}
           <button onClick={handlePurgeClick}>Purge</button>
         </h1>
+        {/* Todoリストを表示するための無秩序リストを作成する要素 */}
+        {/* id="todos"は、Todoリストを一意に識別するための属性であり、CSSスタイルの適用やJavaScriptでの操作を容易にする役割 */}
+        {/* todoItemsは、Todoリストの各アイテムを表すReactコンポーネントの配列 */}
         <ul id="todos">{todoItems}</ul>
+        {/* AddFormは、ユーザーが新しいTodoアイテムを追加するための入力フィールドとボタンを含むコンポーネント */}
+        {/* onSubmitは、AddFormコンポーネントに渡されるプロパティ（props）で、フォームが送信されたときに実行される関数 */}
+        {/* handleAddFormSubmitは、親コンポーネント（Appコンポーネントなど）で定義された関数で、入力されたTodoのタイトルを受け取り、新しいTodoアイテムをリストに追加する処理を行う */}
         <AddForm onSubmit={handleAddFormSubmit} />
       </div>
     </>
