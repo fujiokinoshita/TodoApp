@@ -220,17 +220,41 @@ function App() {
       return todo.id !== id;
     });
     // newTodosという配列を引数としてupdateTodosという関数を呼び出すコード
+    // Todoリストの状態を更新するための関数を呼び出すコード
     updateTodos(newTodos);
   };
-
+  // JavaScriptにおけるアロー関数の定義で、特定のTodoアイテムのチェックボックスの状態を変更するための処理を行う関数を宣言している
+  // 特定のTodoアイテムのチェックボックスの状態を変更するためのアロー関数を定義するコード
+  // const handleTodoCheckboxChange: handleTodoCheckboxChangeという名前の定数を宣言し、これにアロー関数を割り当てている。この関数は、Todoアイテムのチェックボックスの状態を変更するための処理を行う。
+  // (id): この部分は、関数が1つの引数idを受け取ることを示している。idは、変更対象のTodoアイテムを一意に識別するための識別子。
   const handleTodoCheckboxChange = (id) => {
+    // JavaScriptにおける配列のメソッドmapを使用して、新しい配列を作成するためのコード
+    // const newTodos: newTodosという名前の新しい定数を宣言する。この定数には、mapメソッドによって生成された新しい配列が格納される。
+    // todos.map(...): todosは元の配列で、mapメソッドを呼び出している。mapメソッドは、配列の各要素に対して指定された関数を実行し、その結果を新しい配列として返す。
     const newTodos = todos.map((todo) => {
       return {
+        // JavaScriptにおけるオブジェクトリテラルの一部で、オブジェクトのプロパティを定義するための構文
+        // id: これは、オブジェクトのプロパティ名。このプロパティは、オブジェクトが持つ識別子を表す。
+        // todo.id: これは、todoオブジェクトのidプロパティにアクセスする。todoは、通常、配列の要素として渡されるオブジェクトで、そのidプロパティの値を新しいオブジェクトのidプロパティに割り当てる。
+        // ,: カンマは、オブジェクトリテラル内で複数のプロパティを区切るために使用される
         id: todo.id,
+        // JavaScriptにおけるオブジェクトリテラルの一部で、オブジェクトのプロパティを定義するための構文
+        // title: これは、オブジェクトのプロパティ名。このプロパティは、オブジェクトが持つタイトルを表す
+        // todo.title: これは、todoオブジェクトのtitleプロパティにアクセスしている。todoは、通常、配列の要素として渡されるオブジェクトで、そのtitleプロパティの値を新しいオブジェクトのtitleプロパティに割り当てる。
+        // ,: カンマは、オブジェクトリテラル内で複数のプロパティを区切るために使用される
         title: todo.title,
-        isCompleted: todo.id === id ? !todo.isCompleted : todo.isCompleted,
+        // JavaScriptにおける三項演算子（条件演算子）を使用して、isCompletedプロパティの値を条件に基づいて設定するためのコード
+        // isCompleted: これは、オブジェクトのプロパティ名。このプロパティは、Todoアイテムが完了しているかどうかを示すブール値（trueまたはfalse）を持つ
+        // todo.id === id: この部分は、todoオブジェクトのidプロパティが、指定されたidと一致するかどうかを比較している。この条件がtrueの場合、isCompletedプロパティの値が反転される。
+        // ?: 三項演算子の条件部分を開始する。条件がtrueの場合、?の後に続く式が評価される。
+        // !todo.isCompleted: 条件がtrueの場合、todo.isCompletedの値を反転させる。つまり、trueならfalseに、falseならtrueに変わる
+        // :: 条件がfalseの場合、:の後に続く式が評価される
+        // todo.isCompleted: 条件がfalseの場合、todo.isCompletedの値がそのまま使用される
+        // ,: カンマは、オブジェクトリテラル内で複数のプロパティを区切るために使用される
+        isCompleted: todo.id === id,
       };
     });
+    // Todoアイテムのリストを更新するための関数呼び出し。この関数を使用することで、新しいTodoアイテムのリストを引数として渡し、既存のリストを更新することができる。これにより、アプリケーションの状態を管理し、ユーザーインターフェースを更新することが容易になる
     updateTodos(newTodos);
   };
 
