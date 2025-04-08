@@ -257,29 +257,62 @@ function App() {
     // Todoアイテムのリストを更新するための関数呼び出し。この関数を使用することで、新しいTodoアイテムのリストを引数として渡し、既存のリストを更新することができる。これにより、アプリケーションの状態を管理し、ユーザーインターフェースを更新することが容易になる
     updateTodos(newTodos);
   };
-
+  // 新しいTodoアイテムを追加するための関数を定義するためのコード
+  // この関数は、引数としてtitleを受け取り、新しいTodoアイテムを作成して既存のリストに追加する処理を行う
   const handleAddFormSubmit = (title) => {
+    // todos配列のコピーを作成するためのコード
+    // スプレッド演算子（...）を使用することで、元の配列の要素を新しい配列に展開し、独立したコピーを作成することができる。これにより、元の配列を変更せずに、新しい配列を操作することができる。
     const newTodos = [...todos];
+    // newTodos配列に新しいTodoアイテムを追加するためのコード
+    // newTodos: これは、操作対象の配列の名前。この配列に新しい要素を追加する
+    // .push(): これは、配列の末尾に新しい要素を追加するためのメソッド。pushメソッドは、配列の長さを1増やし、新しい要素を配列の最後に追加する。
     newTodos.push({
+      // オブジェクトのidプロパティに現在のタイムスタンプを設定するためのコード
+      // Date.now(): これは、JavaScriptのDateオブジェクトのメソッドで、現在の日時をミリ秒単位で返す
       id: Date.now(),
+      // オブジェクトのtitleプロパティに、関数に渡されたtitle引数の値を設定するためのコード。これにより、新しいTodoアイテムのタイトルを、関数に渡された値に設定することができる
       title: title,
+      // オブジェクトのisCompletedプロパティにfalseを設定するためのコード。これにより、新しいTodoアイテムの初期状態が「未完了」であることを示す
       isCompleted: false,
     });
+    // Todoアイテムのリストを更新するための関数呼び出し
     updateTodos(newTodos);
   };
-
+  // todos配列の各要素に対して処理を行い、新しい配列todoItemsを作成するためのコード
+  // mapメソッドを使用することで、元の配列を変更せずに、新しい配列を作成することができる
+  // const todoItems: これは、新しい配列を格納するための変数名。mapメソッドの結果がこの変数に代入される
+  // todos: これは、操作対象の配列。この配列の各要素に対して処理を行う
+  // .map(): これは、配列の各要素に対して指定された関数を実行し、その結果を新しい配列として返すメソッド。mapメソッドは、元の配列を変更せずに、新しい配列を作成する。
+  // (todo) => {: これは、アロー関数の構文。todoは、mapメソッドが配列の各要素を処理する際に使用する引数。この関数は、各todo要素に対して実行される。
   const todoItems = todos.map((todo) => {
+    // 関数から値を返すための構文
     return (
+      // Todoという名前のReactコンポーネントを呼び出すための開始タグ
       <Todo
+        // Reactコンポーネントのkeyプロパティに、現在のTodoアイテムの一意のIDを設定するためのコード。keyを使用することで、Reactは各要素を効率的に更新できる
+        // key: これは、Reactがリスト内の各要素を一意に識別するために使用するプロパティ
+        // =: これは、プロパティに値を代入するための演算子
+        // {todo.id}: これは、JavaScriptの式を評価するための構文。todo.idは、現在のTodoアイテムの一意のIDを指定している
         key={todo.id}
+        // Reactコンポーネントのtodoプロパティに、現在のTodoアイテムのデータを設定するためのコード。このプロパティを使用することで、Todoコンポーネントは、各Todoアイテムのデータにアクセスできるようになる
         todo={todo}
+        // 、ReactコンポーネントのonDeleteClickプロパティに、削除ボタンがクリックされたときに実行される関数を設定するためのコード
+        // onDeleteClick: これは、Todoコンポーネントに渡されるプロパティ名。このプロパティには、削除ボタンがクリックされたときに実行される関数が含まれている。
+        // =: これは、プロパティに値を代入するための演算子。ここでは、onDeleteClickプロパティにhandleTodoDeleteClick関数の値を代入している
+        // {handleTodoDeleteClick}: これは、JavaScriptの式を評価するための構文。handleTodoDeleteClickは、Todoアイテムを削除するための関数
         onDeleteClick={handleTodoDeleteClick}
+        // ReactコンポーネントのonCheckboxChangeプロパティに、チェックボックスが変更されたときに実行される関数を設定するためのコード。このプロパティを使用することで、Todoコンポーネントは、チェックボックスが変更されたときにhandleTodoCheckboxChange関数を呼び出すことができる
+        // onCheckboxChange: これは、Todoコンポーネントに渡されるプロパティ名。このプロパティには、チェックボックスが変更されたときに実行される関数が含まれる
+        // =: これは、プロパティに値を代入するための演算子。ここでは、onCheckboxChangeプロパティにhandleTodoCheckboxChange関数の値を代入している。
+        // {handleTodoCheckboxChange}: これは、JavaScriptの式を評価するための構文。handleTodoCheckboxChangeは、Todoアイテムの完了状態を変更するための関数。
         onCheckboxChange={handleTodoCheckboxChange}
       />
     );
   });
-
+  // 関数から値を返すための構文
   return (
+    // Reactのフラグメントを表す構文
+    // フラグメントは、複数の要素をグループ化するために使用される。フラグメントを使用することで、余分なDOMノードを追加せずに、複数の要素をレンダリングすることができる。
     <>
       {/* HTMLの<div>要素で、className属性を使用してCSSクラスを指定している */}
       <div className="container">
@@ -305,5 +338,5 @@ function App() {
     </>
   );
 }
-
+// JavaScriptのモジュールシステムにおいて、Appコンポーネントをデフォルトエクスポートするための構文。この構文を使用することで、他のモジュールからAppコンポーネントをインポートして使用することができる
 export default App;
