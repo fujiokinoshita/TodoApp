@@ -55,3 +55,10 @@ form input {
   flex: 1;
   padding: 4px;
 }
+
+p {
+  display: block;
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
+}

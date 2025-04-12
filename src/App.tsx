@@ -22,7 +22,7 @@ const Todo = (props) => {
   };
 
   //チェックボックスがクリックされたときの処理を定義する関数
-  const handleCheckboxChange = () => {
+  const handleCheckboxChange = (e) => {
     //親コンポーネントから渡されたチェックボックス変更処理を実行する
     //props.onCheckboxChange：親コンポーネントから渡されたチェックボックス変更処理を実行する関数
     //props.todo.id：変更するtodoアイテムのid
@@ -79,6 +79,8 @@ const AddForm = (props) => {
   // title: 現在の入力内容を保持する変数
   // setTitle: 入力内容を更新するための関数
   const [title, setTitle] = useState("");
+  const [isOverMaxLength, setIsOverMaxLength] = useState(false);
+
   // テキスト入力欄を直接操作するための参照を作成するコード
   // inputRef: テキスト入力欄への参照を保持する変数
   // useRef(null): 新しい参照を作成（初期値はnull）
@@ -89,12 +91,20 @@ const AddForm = (props) => {
   // eはイベントオブジェクトを表すパラメータ
   // イベントオブジェクトとは、ユーザーの操作（イベント）に関する情報を含むオブジェクト
   const handleTextChange = (e) => {
+    const newValue = e.target.value;
+    if (newValue.length >= 10) {
+      setIsOverMaxLength(true);
+      return;
+    }
+
+    setIsOverMaxLength(false);
+    setTitle(e.target.value);
+
     // ユーザーが入力フィールドに入力した新しい値で状態を更新するコード
     // 入力された新しい値でtitleという状態変数を更新している
     // e.currentTarget - イベントが発生した要素（この場合は入力フィールド）を参照している
     // e.currentTarget.value - その入力フィールドに現在入力されている値（テキスト）を取得している
     // setTitle() - ReactのuseStateフックから取得した状態更新関数
-    setTitle(e.currentTarget.value);
   };
   // フォームが送信されたときに実行されるイベントハンドラ関数の定義
   const handleSubmit = (e) => {
@@ -141,10 +151,11 @@ const AddForm = (props) => {
         //inputRef: テキスト入力欄への参照を保持する変数
         ref={inputRef}
       />
+
       {/* //追加ボタンを作るコード */}
       {/* //<button>: クリックできるボタンを作るHTMLタグ */}
       {/* //Add: ボタンに表示するテキスト */}
-      <button>Add</button>
+      <button disabled={isOverMaxLength}>Add</button>
     </form>
   );
 };
@@ -339,4 +350,4 @@ function App() {
   );
 }
 // JavaScriptのモジュールシステムにおいて、Appコンポーネントをデフォルトエクスポートするための構文。この構文を使用することで、他のモジュールからAppコンポーネントをインポートして使用することができる
-export default App;
+// export default App;
